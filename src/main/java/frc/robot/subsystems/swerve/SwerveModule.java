@@ -8,8 +8,9 @@ import static frc.robot.Constants.SwerveModule.*;
 import static frc.robot.Constants.TICKS_PER_DEGREE;
 
 public class SwerveModule {
-    private TalonSRX motorTop;
-    private TalonSRX motorBottom;
+    public TalonSRX motorAngle;
+    public TalonSRX motorSwerve;
+
     private int ANGLE_PORT;
     private int SWERVE_PORT;
     private int module;
@@ -20,42 +21,31 @@ public class SwerveModule {
         this.SWERVE_PORT = SWERVE_PORT;
         this.module = module;
 
-        motorTop = new TalonSRX(ANGLE_PORT);
-        motorBottom = new TalonSRX(SWERVE_PORT);
+        motorAngle = new TalonSRX(ANGLE_PORT);
+        motorSwerve = new TalonSRX(SWERVE_PORT);
 
-        motorTop.config_kP(PID_SLOT, PID[0]);
-        motorTop.config_kP(PID_SLOT, PID[1]);
-        motorTop.config_kP(PID_SLOT, PID[2]);
+        motorAngle.config_kP(PID_SLOT_ANGLE, PID_ANGLE[0]);
+        motorAngle.config_kP(PID_SLOT_ANGLE, PID_ANGLE[1]);
+        motorAngle.config_kP(PID_SLOT_ANGLE, PID_ANGLE[2]);
 
-        motorBottom.config_kP(PID_SLOT, PID[0]);
-        motorBottom.config_kP(PID_SLOT, PID[1]);
-        motorBottom.config_kP(PID_SLOT, PID[2]);
-
-        motorTop.setSelectedSensorPosition(SENSOR_POS_TOP[module]);
-        motorBottom.setSelectedSensorPosition(SENSOR_POS_BOTTOM[module]);
+        motorSwerve.config_kP(PID_SLOT_SWERVE, PID_SWERVE[0]);
+        motorSwerve.config_kP(PID_SLOT_SWERVE, PID_SWERVE[1]);
+        motorSwerve.config_kP(PID_SLOT_SWERVE, PID_SWERVE[2]);
     }
 
-    public void setMotorTopVelocity(double velocity) {
-        motorTop.set(ControlMode.Velocity, unitModel.toTicks100ms(velocity));
+    public void setSwerveAngle(double angle) {
+        motorAngle.set(ControlMode.Position, unitModel.toTicks(angle));
     }
 
-    public void setMotorBottomVelocity(double velocity) {
-        motorBottom.set(ControlMode.Velocity, unitModel.toTicks100ms(velocity));
+    public void setSwerveVelocity(double velocity) {
+        motorSwerve.set(ControlMode.Velocity, unitModel.toTicks100ms(velocity));
     }
 
-    public void setMotorTopAngle(double angle) {
-        motorTop.set(ControlMode.Position, unitModel.toTicks(angle));
+    public double getSwerveAngle() {
+        return unitModel.toUnits(motorAngle.getSelectedSensorPosition());
     }
 
-    public void setMotorBottomAngle(double angle) {
-        motorBottom.set(ControlMode.Position, unitModel.toTicks(angle));
-    }
-
-    public double getVelocityTop() {
-        return unitModel.toVelocity(motorTop.getSelectedSensorVelocity());
-    }
-
-    public double getVelocityBottom() {
-        return unitModel.toVelocity(motorBottom.getSelectedSensorVelocity());
+    public double getSwerveVelocity() {
+        return unitModel.toVelocity(motorSwerve.getSelectedSensorVelocity());
     }
 }

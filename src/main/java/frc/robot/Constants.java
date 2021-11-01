@@ -21,7 +21,10 @@ public final class Constants {
     public static class SwerveModule {
         public static final int[] SENSOR_POS_TOP = {0, 0, 0, 0}; // fr, fl, rr, rl
         public static final int[] SENSOR_POS_BOTTOM = {0, 0, 0, 0}; // fr, fl, rr, rl
-        public static final double[] PID = {0.1, 0, 0.01}; // kp, ki, kd
-        public static final int PID_SLOT = 0;
+        public static final double[] PID_ANGLE = {0.1, 0, 0.01}; // kp, ki, kd
+        public static final double[] PID_SWERVE = {0.2, 0, 0.02}; // kp, ki, kd
+        public static final int PID_SLOT_ANGLE = 0;
+        public static final int PID_SLOT_SWERVE = 0;
+        public static final int PID_X = 0;
     }
 }
