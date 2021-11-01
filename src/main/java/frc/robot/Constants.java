@@ -16,4 +16,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static final double TICKS_PER_DEGREE = 1024 / 360.0;
+
+    public static class SwerveModule {
+        public static final int[] SENSOR_POS_TOP = {0, 0, 0, 0}; // fr, fl, rr, rl
+        public static final int[] SENSOR_POS_BOTTOM = {0, 0, 0, 0}; // fr, fl, rr, rl
+        public static final double[] PID = {0.1, 0, 0.01}; // kp, ki, kd
+        public static final int PID_X = 0;
+    }
 }
