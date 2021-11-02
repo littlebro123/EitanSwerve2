@@ -2,10 +2,12 @@ package frc.robot.subsystems.swerve;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.geometry.Translation2d;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.kinematics.SwerveDriveKinematics;
 
-import static frc.robot.Ports.ANGLE_PORTS;
-import static frc.robot.Ports.SWERVE_PORTS;
+import static frc.robot.Constants.*;
+import static frc.robot.Ports.SwerveDrive.*;
 
 public class SwerveDrive {
     private SwerveModule[] swerveModules = new SwerveModule[4];
@@ -27,11 +29,9 @@ public class SwerveDrive {
         }
     }
 
-    public void driveInDirection(double velocity, double angle) {
-        follow();
-
+    public void driveInDirection(double output, double angle) {
         swerveModules[0].setSwerveAngle(angle);
-        swerveModules[0].setSwerveVelocity(velocity);
+        swerveModules[0].setSwerveOutput(output);
     }
 
     public void unfollow() {

@@ -37,8 +37,8 @@ public class SwerveModule {
         motorAngle.set(ControlMode.Position, unitModel.toTicks(angle));
     }
 
-    public void setSwerveVelocity(double velocity) {
-        motorSwerve.set(ControlMode.Velocity, unitModel.toTicks100ms(velocity));
+    public void setSwerveOutput(double output) {
+        motorSwerve.set(ControlMode.PercentOutput, output);
     }
 
     public double getSwerveAngle() {
